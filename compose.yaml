@@ -4,7 +4,7 @@ services:
   portainer:
     image: portainer/portainer-ce:alpine
     container_name: portainer
-    restart: unless-stopped
+    restart: unless-stopped  #redémarrage automatique si sa crash
     networks:
       - cloud
     ports:
@@ -23,7 +23,7 @@ services:
   nextclouddb:
     image: mariadb
     container_name: nextcloud-db
-    restart: unless-stopped
+    restart: unless-stopped #redémarrage automatique si sa crash
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW  # Configuration spécifique à Nextcloud
     networks:
       - cloud
@@ -42,7 +42,7 @@ services:
   nextcloud:
     image: nextcloud
     container_name: nextcloud
-    restart: unless-stopped
+    restart: unless-stopped #redémarrage automatique si sa crash
     depends_on:
       - nextclouddb  # Doit démarrer après la base de données
     networks:
@@ -72,7 +72,7 @@ services:
   homepage:
     image: ghcr.io/benphelps/homepage:latest
     container_name: homepage
-    restart: unless-stopped
+    restart: unless-stopped #redémarrage automatique si sa crash
     networks:
       - cloud
     ports:
@@ -93,7 +93,7 @@ services:
   proxy:
     image: traefik
     container_name: traefik
-    restart: unless-stopped
+    restart: unless-stopped #redémarrage automatique si sa crash
     networks:
       - cloud
     command:
